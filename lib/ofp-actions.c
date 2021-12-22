@@ -8362,10 +8362,10 @@ ofpacts_decode_pof1(const void *actions, size_t actions_len,
         enum ofp_raw_action_type raw;
         enum ofperr error;
         uint64_t arg;
-        VLOG_INFO("+++++++++++zq ofpacts_decode_pof1: before ofpact_pull_raw, in pof");
+//        VLOG_INFO("+++++++++++zq ofpacts_decode_pof1: before ofpact_pull_raw, in pof");
         error = ofpact_pull_raw(&openflow, ofp_version, &raw, &arg);
         if (!error) {
-            VLOG_INFO("+++++++++++zq ofpacts_decode_pof1: before ofpact_decode");
+//            VLOG_INFO("+++++++++++zq ofpacts_decode_pof1: before ofpact_decode");
             error = ofpact_decode(action, raw, ofp_version, arg, vl_mff_map,
                                    ofpacts_tlv_bitmap, ofpacts);
             /*  // dump raw action data
@@ -8375,7 +8375,7 @@ ofpacts_decode_pof1(const void *actions, size_t actions_len,
             VLOG_INFO("+++++tsf ofpacts_decode: ds_put_hex_dump_action: %s", ds_cstr(&s));
             ds_destroy(&s);
             */
-            VLOG_INFO("+++++++++++zq ofpacts_decode_pof1: after ofpact_decode");
+//            VLOG_INFO("+++++++++++zq ofpacts_decode_pof1: after ofpact_decode");
         }
 
         if(raw == 4) {
@@ -9080,7 +9080,7 @@ decode_openflow11_instruction(const struct ofp11_instruction *inst,
     uint16_t len = 304;
     VLOG_INFO("+++++++++++zq decode_openflow11_instruction:start");
     switch (inst->type) {
-        VLOG_INFO("+++++++++++zq decode_openflow11_instruction: %d", inst->type);
+        /*VLOG_INFO("+++++++++++zq decode_openflow11_instruction: %d", inst->type);*/
     case CONSTANT_HTONS(OFPIT11_EXPERIMENTER):
         return OFPERR_OFPBIC_BAD_EXPERIMENTER;
 
@@ -9316,11 +9316,11 @@ ofpacts_pull_openflow_pof_instructions(struct ofpbuf *openflow,
         VLOG_INFO("gototable ogt:table_id=%d,type=%d,len=%d",ogt->table_id,ogt->ofpact.type,ogt->ofpact.len);
     }
 
-    VLOG_INFO("+++++++++++zq ofpacts_pull_openflow_instructions: before ofpacts_verify");
+//    VLOG_INFO("+++++++++++zq ofpacts_pull_openflow_instructions: before ofpacts_verify");
 //    ofpacts->size = 56;
     error = ofpacts_verify(ofpacts->data, ofpacts->size, version,
                            (1u << N_OVS_INSTRUCTIONS) - 1, 0, NULL);
-    VLOG_INFO("+++++++++++zq ofpacts_pull_openflow_pof_instructions: after ofpacts_verify");
+//    VLOG_INFO("+++++++++++zq ofpacts_pull_openflow_pof_instructions: after ofpacts_verify");
     exit:
     if (error) {
         VLOG_INFO("+++++++++++zq ofpacts_pull_openflow_pof_instructions:error");
@@ -9701,7 +9701,7 @@ ofpacts_verify(const struct ofpact ofpacts[], size_t ofpacts_len,
     const struct ofpact *a;
     enum ovs_instruction_type inst;
 
-    VLOG_INFO("++++++zq ofpacts_verify: start");
+//    VLOG_INFO("++++++zq ofpacts_verify: start");
     inst = OVSINST_OFPIT13_METER;
     int i = 0;
     VLOG_INFO("++++++zq ofpacts_verify: before OFPACT_FOR_EACH, ofpacts_len: %d", ofpacts_len);
@@ -9767,7 +9767,7 @@ ofpacts_verify(const struct ofpact ofpacts[], size_t ofpacts_len,
         /*VLOG_INFO("++++++zq ofpacts_verify: in OFPACT_FOR_EACH, run %dth time, a->type: %d, a->len: %d",
                   i++, a->type, a->len);*/
     }  // here
-    VLOG_INFO("++++++zq ofpacts_verify: end");
+//    VLOG_INFO("++++++zq ofpacts_verify: end");
     return 0;
 }
 
@@ -10625,7 +10625,7 @@ ofpact_pull_raw(struct ofpbuf *buf, enum ofp_version ofp_version,
     enum ofperr error;
 
     *raw = *arg = 0;
-    VLOG_INFO("++++++zq ofpact_pull_raw: before ofpact_decode_raw");
+//    VLOG_INFO("++++++zq ofpact_pull_raw: before ofpact_decode_raw");
     error = ofpact_decode_raw(ofp_version, oah, buf->size, &action);
     VLOG_INFO("++++++zq ofpact_pull_raw: after ofpact_decode_raw, ver: %d, type: %d, len:%d\n", ofp_version, oah->type, ntohs(oah->len));
     if (error) {
